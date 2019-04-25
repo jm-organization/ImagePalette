@@ -1,9 +1,4 @@
 # ImagePalette
-[![Build Status](https://travis-ci.org/brianmcdo/ImagePalette.png)](https://travis-ci.org/brianmcdo/ImagePalette)
-[![Total Downloads](https://poser.pugx.org/brianmcdo/image-palette/downloads.png)](https://packagist.org/packages/brianmcdo/image-palette)
-[![Latest Stable Version](https://poser.pugx.org/brianmcdo/image-palette/v/stable.png)](https://packagist.org/packages/brianmcdo/image-palette)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/brianmcdo/ImagePalette/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/brianmcdo/ImagePalette/?branch=master)
-
 ImagePalette is used to extract a color palette from a given image. Aside from being a native PHP implementation, ImagePalette differs from many palette extractors as it works off a white list color palette. Below is the default palette:
 
 ![](http://i.imgur.com/Rabqkqq.png)
@@ -23,7 +18,7 @@ Simply add the following to your ```composer.json``` file:
 
 ```JSON
 "require": {
-    "brianmcdo/image-palette": "dev-master"
+    "jm-organization/image-palette": "dev-master"
 }
 ```
 
@@ -31,7 +26,7 @@ Simply add the following to your ```composer.json``` file:
 
 ```PHP
 // initiate with image
-$palette = new \BrianMcdo\ImagePalette\ImagePalette( 'https://www.google.co.uk/images/srpr/logo3w.png' );
+$palette = new \JMOrganization\ImagePalette\ImagePalette( 'https://www.google.co.uk/images/srpr/logo3w.png' );
 
 // get the prominent colors
 $colors = $palette->colors; // array of Color objects
@@ -61,7 +56,7 @@ Find the `providers` key in `app/config/app.php` and register the `ImagePaletteS
 ```php
 'providers' => array(
     // ...
-    'BrianMcdo\ImagePalette\Laravel\ImagePaletteServiceProvider',
+    'JMOrganization\ImagePalette\Laravel\ImagePaletteServiceProvider',
 )
 ```
 
@@ -70,7 +65,7 @@ Then, find the `aliases` key in `app/config/app.php` and register the `ImagePale
 ```php
 'aliases' => array(
     // ...
-    'ImagePalette' => 'BrianMcdo\ImagePalette\Laravel\ImagePaletteFacade',
+    'ImagePalette' => 'JMOrganization\ImagePalette\Laravel\ImagePaletteFacade',
 )
 ```
 
@@ -89,7 +84,7 @@ ImagePalette::getColors($fileOrUrl);
 By default, `ImagePalette` will process every 10th pixel. This is for performance reasons, you can change this like below. The precision is a performance-to-time decision.
 
 ```PHP
-$palette = new \BrianMcdo\ImagePalette\ImagePalette( $src, 5 /* precision */ );
+$palette = new \JMOrganization\ImagePalette\ImagePalette( $src, 5 /* precision */ );
 ```
 
 #### Color Count
@@ -98,7 +93,7 @@ To control the amount colors returned set the third parameter.
 You can also provide the getter with a custom length.
 
 ```PHP
-$palette = new \BrianMcdo\ImagePalette\ImagePalette( $src, 5, 3 /* number of colors to return */ );
+$palette = new \JMOrganization\ImagePalette\ImagePalette( $src, 5, 3 /* number of colors to return */ );
 $colors = $palette->getColors(7 /* number of colors to return */);
 ```
 
