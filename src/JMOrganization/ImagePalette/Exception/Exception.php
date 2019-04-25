@@ -9,12 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace BrianMcdo\ImagePalette\Exception;
-
-use Exception as BaseException;
+namespace JMOrganization\ImagePalette\Exception;
 
 /**
- * Class UnsupportedFileTypeException
+ * ImagePalette Specific Exception
  * @package BrianMcdo\ImagePalette
  */
-class UnsupportedFileTypeException extends BaseException implements Exception {}
+interface Exception {}

@@ -9,21 +9,24 @@
  * file that was distributed with this source code.
  */
 
-use BrianMcdo\ImagePalette\Client;
+use JMOrganization\ImagePalette\Client;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class LaravelTest
  */
-class LaravelTest extends PHPUnit_Framework_Testcase {
-
-    /**
-     * Test Client
-     * @return mixed
-     */
+class LaravelTest extends TestCase {
+	/**
+	 * Test Client
+	 *
+	 * @return mixed
+	 * @throws Exception
+	 */
     public function testDoesClientReturnArray()
     {
         $load = new Client;
         $colors = $load->getColors(__DIR__.'/test.jpg', 5);
+
         return $this->assertTrue(is_array($colors));
     }
 } 

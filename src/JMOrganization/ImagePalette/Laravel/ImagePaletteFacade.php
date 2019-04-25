@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace BrianMcdo\ImagePalette\Laravel;
+namespace JMOrganization\ImagePalette\Laravel;
 
 use Illuminate\Support\Facades\Facade;
 

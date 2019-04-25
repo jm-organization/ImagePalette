@@ -9,18 +9,25 @@
  * file that was distributed with this source code.
  */
 
-use BrianMcdo\ImagePalette\ImagePalette;
+use JMOrganization\ImagePalette\ImagePalette;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class ImagePaletteTest
  */
-class ImagePaletteTest extends PHPUnit_Framework_Testcase
+class ImagePaletteTest extends TestCase
 {
     private $palette;
 	private $paletteObject;
 
-    public function setUp() {
-        $this->paletteObject = new ImagePalette(__DIR__.'/logo11w.png', 5, 20);
+	/**
+	 * @throws Exception
+	 */
+	public function setUp() {
+        $this->paletteObject = new ImagePalette(__DIR__.'/logo11w.png', [
+        	'precision' => 5,
+        	'paletteLength' => 20,
+        ]);
         $this->palette = $this->paletteObject->getColors();
     }
 

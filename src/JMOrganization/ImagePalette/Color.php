@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace BrianMcdo\ImagePalette;
+namespace JMOrganization\ImagePalette;
 
 /**
  * 
  * Represents an argb color
  * 
  * @author  Gandalfx
- * @package BrianMcdo\ImagePalette
+ * @package JMOrganization\ImagePalette
  * 
  */
 class Color {

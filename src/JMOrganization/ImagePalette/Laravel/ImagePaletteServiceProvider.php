@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace BrianMcdo\ImagePalette\Laravel;
+namespace JMOrganization\ImagePalette\Laravel;
 
 use Illuminate\Support\ServiceProvider;
 use BrianMcdo\ImagePalette\Client;
@@ -30,7 +30,7 @@ class ImagePaletteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->package('brianmcdo/image-palette');
+        $this->package('jm-organization/image-palette');
     }
 
     /**

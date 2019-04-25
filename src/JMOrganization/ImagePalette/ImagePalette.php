@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace BrianMcdo\ImagePalette;
+namespace JMOrganization\ImagePalette;
 
 use ArrayIterator;
-use BrianMcdo\ImagePalette\Exception\UnsupportedFileTypeException;
+use JMOrganization\ImagePalette\Exception\UnsupportedFileTypeException;
 use Exception;
 use Imagick;
 use IteratorAggregate;
@@ -67,14 +67,7 @@ class ImagePalette implements IteratorAggregate
      * Colors Whitelist
      * @var array
      */
-    protected $whiteList = array(
-        0x660000, 0x990000, 0xcc0000, 0xcc3333, 0xea4c88, 0x993399,
-        0x663399, 0x333399, 0x0066cc, 0x0099cc, 0x66cccc, 0x77cc33,
-        0x669900, 0x336600, 0x666600, 0x999900, 0xcccc33, 0xffff00,
-        0xffcc33, 0xff9900, 0xff6600, 0xcc6633, 0x996633, 0x663300,
-        0x000000, 0x999999, 0xcccccc, 0xffffff, 0xE7D8B1, 0xFDADC7,
-        0x424153, 0xABBCDA, 0xF5DD01
-    );
+    protected $whiteList = [];
     
     /**
      * Colors that were found to be prominent
@@ -93,22 +86,37 @@ class ImagePalette implements IteratorAggregate
 
 	/**
 	 * Constructor
+	 *
 	 * @param string $file
-	 * @param int $precision
-	 * @param int $paletteLength
-	 * @param string $library
+	 * @param array  $options
+	 *
+	 * @throws Exception
 	 */
-    public function __construct($file, $precision = 10, $paletteLength = 5, $library = 'gd')
+    public function __construct($file, array $options = [])
     {
+    	$options = array_merge([
+			'precision' => 10,
+			'paletteLength' => 10,
+			'library' => 'gd',
+			'whitelist' => [
+				0x660000, 0x990000, 0xcc0000, 0xcc3333, 0xea4c88, 0x993399,
+				0x663399, 0x333399, 0x0066cc, 0x0099cc, 0x66cccc, 0x77cc33,
+				0x669900, 0x336600, 0x666600, 0x999900, 0xcccc33, 0xffff00,
+				0xffcc33, 0xff9900, 0xff6600, 0xcc6633, 0x996633, 0x663300,
+				0x000000, 0x999999, 0xcccccc, 0xffffff, 0xE7D8B1, 0xFDADC7,
+				0x424153, 0xABBCDA, 0xF5DD01
+			],
+	    ], $options);
+
         $this->file = $file;
-        $this->precision = $precision;
-        $this->paletteLength = $paletteLength;
+        $this->precision = $options['precision'];
+        $this->paletteLength = $options['paletteLength'];
         
         // use provided libname or auto-detect
-        $this->lib = $this->graphicsLibrary($library);
+        $this->lib = $this->graphicsLibrary($options['library']);
         
         // create an array with color ints as keys
-        $this->whiteList = array_fill_keys($this->whiteList, 0);
+        $this->whiteList = array_fill_keys($options['whitelist'], 0);
 
         $this->process($this->lib);
     }
@@ -167,6 +175,8 @@ class ImagePalette implements IteratorAggregate
 
 	/**
 	 * Load and set the working image.
+	 *
+	 * @throws UnsupportedFileTypeException
 	 */
     protected function setWorkingImageGD()
     {
@@ -201,6 +211,7 @@ class ImagePalette implements IteratorAggregate
 	 *
 	 * @todo needs work
 	 * @return mixed
+	 * @throws \ImagickException
 	 */
     protected function setWorkingImageImagick()
     {
@@ -354,7 +365,13 @@ class ImagePalette implements IteratorAggregate
         ]);
     }
 
-    protected function getPixelColorGmagick($x, $y)
+	/**
+	 * @param $x
+	 * @param $y
+	 *
+	 * @throws Exception
+	 */
+	protected function getPixelColorGmagick($x, $y)
     {
         throw new Exception("Gmagick not supported: ($x, $y)");
     }
